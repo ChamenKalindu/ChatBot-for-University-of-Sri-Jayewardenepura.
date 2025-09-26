@@ -20,7 +20,7 @@ export const chatService = {
          model: 'gpt-4o-mini',
          messages: conversationRepository.getPastMessages(conversationId) || [],
          temperature: 0.5,
-         max_tokens: 100,
+         max_tokens: 300,
       });
 
       const assistantMessage =
