@@ -1,4 +1,13 @@
 import type { ChatCompletionMessageParam } from 'openai/resources';
+import fs from 'fs';
+import path from 'path';
+import template from '../prompts/chatbot.txt';
+
+const uniInfo = fs.readFileSync(
+   path.join(__dirname, '../prompts/japura.md'),
+   'utf-8'
+);
+const instructions = template.replace('{{parkInfo}}', uniInfo);
 
 const conversations: Record<string, ChatCompletionMessageParam[]> = {};
 
@@ -8,8 +17,7 @@ export const conversationRepository = {
          conversations[conversationId] = [
             {
                role: 'system',
-               content:
-                  'You are a helpful assistant. You are answering quiz questions and remembering previous ones.',
+               content: instructions,
             },
          ];
       }

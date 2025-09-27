@@ -1,7 +1,9 @@
-import { conversationRepository } from '../repositories/conversation.repository';
 import { OpenAI } from 'openai';
 
+import { conversationRepository } from '../repositories/conversation.repository';
+
 const endpoint = 'https://models.github.ai/inference';
+
 const client = new OpenAI({
    baseURL: endpoint,
    apiKey: process.env.OPENAI_API_KEY,

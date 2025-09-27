@@ -6,6 +6,11 @@ import { useForm } from 'react-hook-form';
 import TypingIndicator from './TypingIndicator';
 import type { message } from './ChatMessages';
 import ChatMessages from './ChatMessages';
+import notificationSound from '@/assets/audio/notification.mp3';
+import popSound from '@/assets/audio/pop.mp3';
+
+const popAudio = new Audio(popSound);
+const notificationAudio = new Audio(notificationSound);
 
 type FormData = {
    prompt: string;
@@ -27,6 +32,7 @@ const ChatBot = () => {
          setMessages((prev) => [...prev, { content: prompt, role: 'user' }]);
          setIsBotTyping(true);
          setError('');
+         popAudio.play();
 
          reset({ prompt: '' });
 
@@ -39,6 +45,7 @@ const ChatBot = () => {
             ...prev,
             { content: data.message, role: 'bot' },
          ]);
+         notificationAudio.play();
       } catch (error) {
          console.log(error);
          setError('Something went wrong, try again');
